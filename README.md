@@ -156,7 +156,98 @@ AUDIT_SUMMARY
 ↓
 COMPLETED or CLOSED_REJECTED
 ```
+GMAIL_TRIGGER
+↓
+INTAKE
+   ├── DocumentTakerWorkflow → FileArray
+   └── DocumentAnalysisAgent → caseDocumentValidationResult
+↓
+DOCUMENT_DECISION_GATEWAY
+   ├── Document Missing / Document Issue → CLIENT_DOCUMENT_RESUBMISSION
+   ├── Compliance issue from intake → COMPLIANCE_REVIEW
+   └── Doc Validation Pass → DUPLICATE_CHECK
 
+CLIENT_DOCUMENT_RESUBMISSION
+   ├── SentEmailNotification / Request Document Resubmission
+   └── Wait for Client Response
+        ↓
+        Resume case when client responds / new documents arrive
+        ↓
+        INTAKE
+
+DUPLICATE_CHECK
+   └── DuplicateValidator API
+↓
+DUPLICATE_DECISION_GATEWAY
+   ├── No Duplicate → RISK_REVIEW
+   └── Possible Duplicate → OPERATIONS_REVIEW
+
+OPERATIONS_REVIEW
+   └── Action Center: operations-review-app
+↓
+OPERATIONS_DECISION_GATEWAY
+   ├── REQUEST_CORRECT_DOCUMENT → CLIENT_DOCUMENT_RESUBMISSION
+   ├── REQUEST_CLARIFICATION → REQUEST_CLARIFICATION
+   ├── RISK_SCORING → RISK_REVIEW
+   ├── SEND_BACK_TO_COMPLIANCE / ESCALATE → COMPLIANCE_REVIEW
+   └── REJECT_CASE → REJECT_CASE
+
+REQUEST_CLARIFICATION
+   ├── SentEmailNotification / RequestClarification
+   └── Wait for Clarification
+        ↓
+        Resume case when client responds
+        ↓
+        INTAKE or configured next stage
+
+RISK_REVIEW
+   ├── RiskAnalyze
+   └── RiskSummarizationAgent
+↓
+RISK_DECISION_GATEWAY
+   ├── Low / Clear / Acceptable Risk → APPROVE_ONBOARDING
+   └── Medium / High / Screening Issue → COMPLIANCE_REVIEW
+
+COMPLIANCE_REVIEW
+   └── Action Center: compliance-review-app
+↓
+COMPLIANCE_DECISION_GATEWAY
+   ├── APPROVED_FOR_PROVISIONING → APPROVE_ONBOARDING
+   ├── REQUEST_ADDITIONAL_VERIFICATION → REQUEST_ADDITIONAL_VERIFICATION
+   ├── SEND_BACK_TO_OPERATIONS → OPERATIONS_REVIEW
+   ├── SUPERVISOR_ESCALATION → SUPERVISOR_ESCALATION
+   └── REJECT_CASE / CONFIRM_REJECTION → REJECT_CASE
+
+REQUEST_ADDITIONAL_VERIFICATION
+   ├── SentEmailNotification / RequestAdditionalDocs
+   └── Wait for Additional Verification
+        ↓
+        Resume case when additional documents arrive
+        ↓
+        INTAKE
+
+SUPERVISOR_ESCALATION
+   └── Action Center: supervisor-escalation-app
+↓
+SUPERVISOR_DECISION_GATEWAY
+   ├── APPROVE_EXCEPTION → APPROVE_ONBOARDING
+   ├── RETURN_TO_COMPLIANCE → COMPLIANCE_REVIEW
+   └── CONFIRM_REJECTION → REJECT_CASE
+
+APPROVE_ONBOARDING
+   └── ProvisionAccountApiWorkflow / Account Provisioning
+↓
+AUDIT_CLOSURE_APPROVED
+   ├── AuditClosureApiWorkflow
+   └── AuditSummaryAgent
+↓
+COMPLETION
+
+REJECT_CASE
+   ├── AuditClosureApiWorkflow
+   └── AuditSummaryAgent
+↓
+CLOSED_REJECTED / COMPLETION
 ## Why This Design Is Enterprise-Ready
 
 WealthCaseIQ separates AI reasoning from deterministic business decisions.
