@@ -696,5 +696,5 @@ Ravindra Reddy
 ## Hackathon Submission
 
 * Project Name: WealthCaseIQ
-* Repository: https://github.com/<your-github-username>/wealthcaseiq-uipath-agenthack
-* Demo Video: <PASTE_PUBLIC_YOUTUBE_OR_VIMEO_LINK_HERE>
+* Repository: [https://github.com/<your-github-username>/wealthcaseiq-uipath-agenthack](https://github.com/rmadireddy33/wealthcaseiq-uipath-agenthack)
+* Demo Video: [<PASTE_PUBLIC_YOUTUBE_OR_VIMEO_LINK_HERE>](https://www.youtube.com/watch?v=-0nFi7vSudk)
