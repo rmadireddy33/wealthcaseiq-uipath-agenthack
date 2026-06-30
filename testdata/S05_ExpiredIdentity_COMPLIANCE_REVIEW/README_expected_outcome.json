@@ -1,0 +1,13 @@
+{
+  "scenario": "S05_ExpiredIdentity_COMPLIANCE_REVIEW",
+  "description": "Driver license is expired. Expected: FAIL -> COMPLIANCE_REVIEW.",
+  "caseId": "1020005",
+  "fallbackEmailId": "ravindra.reddy33@gmail.com",
+  "fallbackAdvisorEmailId": "ravindra.reddy33@gmail.com",
+  "files": [
+    "AgentHack_Client_Onboarding.pdf",
+    "AgentHack_Florida_Driver_License.pdf",
+    "AgentHack_W9_Form.pdf",
+    "AgentHack_Utility_Bill.pdf"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "scenario": "S03_DOBMismatch_COMPLIANCE_REVIEW",
+  "description": "Onboarding DOB and ID DOB do not match. Expected: FAIL/NEEDS_REVIEW -> COMPLIANCE_REVIEW.",
+  "caseId": "1020003",
+  "fallbackEmailId": "ravindra.reddy33@gmail.com",
+  "fallbackAdvisorEmailId": "ravindra.reddy33@gmail.com",
+  "files": [
+    "AgentHack_Client_Onboarding.pdf",
+    "AgentHack_Florida_Driver_License.pdf",
+    "AgentHack_W9_Form.pdf",
+    "AgentHack_Utility_Bill.pdf"
+  ]
+}
