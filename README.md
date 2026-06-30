@@ -403,7 +403,7 @@ WealthCaseIQ demonstrates a reusable enterprise pattern for regulated, exception
 wealthcaseiq-uipath-agenthack/
 ├── README.md
 ├── LICENSE
-├── docs/
+├── src/
 │   ├── architecture-overview.md
 │   ├── setup-guide.md
 │   ├── demo-script.md
@@ -468,13 +468,42 @@ To run this project, you need:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-github-username>/wealthcaseiq-uipath-agenthack.git
+git clone [https://github.com/<your-github-username>/wealthcaseiq-uipath-agenthack.git](https://github.com/rmadireddy33/wealthcaseiq-uipath-agenthack)
 cd wealthcaseiq-uipath-agenthack
 ```
 
-### 2. Create UiPath Components
 
-Create or import the following components in UiPath Studio Web / Automation Cloud.
+### 2. Studio Web Validation and Deployment
+
+Export the project to Studio Web:
+
+```text
+wealthcaseiq-uipath-agenthack/src/WM Client Onboarding Case Manager.uis
+```
+
+After opening the project in Studio Web, fix all validation errors before publishing.
+
+First, reestablish the Gmail connection anywhere it is missing or broken. Check the Gmail trigger, email notification workflow, and any step that sends or reads emails.
+
+Next, open each Agent and select the correct model if the model is missing. Save the Agent after selecting the model.
+
+Then, open the Send Email Notification workflow and make sure the correct Gmail connection is selected. Validate the email recipient, subject, body, and any mapped values.
+
+Run validation again and fix any remaining errors until the project is clean.
+
+After validation passes, publish and deploy the project to Orchestrator. If Studio Web publishing fails, use the coded agent or UiPath CLI to publish the package to Orchestrator.
+
+After deployment, open Orchestrator and confirm:
+
+* All required packages are available.
+* Each process points to the latest package version.
+* Process names are clear and easy to understand.
+* Gmail connections are selected and working for each process that uses Gmail.
+* Agent models and package requirements are resolved.
+
+By default, Gmail polling may run every 5 minutes. For faster demo testing, reduce the polling interval to a lower supported value, such as 1 minute, if the environment allows it.
+
+Finally, run one happy-path test and one exception-path test to confirm the case starts, emails work, agents run, reviews route correctly, and the case closes successfully.
 
 #### Agents
 
@@ -499,15 +528,6 @@ Create or import the following components in UiPath Studio Web / Automation Clou
 
 Create the case plan using the architecture described in this README.
 
-### 3. Configure Storage Bucket
-
-Create a UiPath Storage Bucket for onboarding documents.
-
-Recommended folder pattern:
-
-```text
-/onboarding/{caseId}/documents/
-```
 
 The uploaded email attachments should be stored or resolved into a file array that can be passed into DocumentReviewAgent.
 
@@ -573,7 +593,7 @@ auditClosureResult.nextStage
 ```
 
 ### 7. Run the Happy Path
-
+Test Data available inside repository: 
 Send an onboarding email with the required documents.
 
 Expected happy path:
@@ -634,29 +654,6 @@ Do not route based on AI summary output. Final routing should use deterministic 
 * human review `nextStage`
 * `auditClosureResult.nextStage`
 
-## Demo Video
-
-Demo video link:
-
-```text
-<PASTE_PUBLIC_YOUTUBE_OR_VIMEO_LINK_HERE>
-```
-
-The video is under five minutes and demonstrates the solution functioning in UiPath.
-
-## Demo Video Suggested Flow
-
-Recommended video structure:
-
-1. Show the onboarding email and attachments
-2. Show the Maestro case created
-3. Show Document Review result
-4. Show Duplicate Check result
-5. Show Operations Review or Compliance Review
-6. Show Risk Scoring and mock screening result
-7. Show Provisioning result
-8. Show Audit Closure result
-9. Show final Completed or Closed Rejected stage
 
 ## Built With
 
@@ -680,8 +677,7 @@ Recommended video structure:
 * PDF sample documents
 * Mock Wealth CRM logic
 * Mock AML / PEP / Sanctions / Adverse Media screening logic
-* GitHub
-* YouTube
+
 
 ## License
 
