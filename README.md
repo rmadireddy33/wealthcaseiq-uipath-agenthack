@@ -470,7 +470,7 @@ cd wealthcaseiq-uipath-agenthack
 Export the project to Studio Web:
 
 ```text
-wealthcaseiq-uipath-agenthack/src/WM Client Onboarding Case Manager.uis
+wealthcaseiq-uipath-agenthack/src/WealthCaseIQ.uis
 ```
 
 After opening the project in Studio Web, fix all validation errors before publishing.
