@@ -401,39 +401,31 @@ WealthCaseIQ demonstrates a reusable enterprise pattern for regulated, exception
 
 ```text
 wealthcaseiq-uipath-agenthack/
-├── README.md
-├── LICENSE
 ├── src/
-│   ├── architecture-overview.md
-│   ├── setup-guide.md
-│   ├── demo-script.md
-│   └── screenshots/
-├── sample-inputs/
-│   ├── document-review-sample.json
-│   ├── duplicate-check-sample.json
-│   ├── risk-scoring-sample.json
-│   ├── provisioning-sample.json
-│   ├── audit-closure-sample.json
-│   └── audit-summary-sample.json
-├── sample-documents/
-│   └── README.md
-├── case-plan/
-│   └── README.md
-├── workflows/
-│   ├── DuplicateCheckApiWorkflow/
-│   ├── RiskScoringApiWorkflow/
-│   ├── ProvisionAccountApiWorkflow/
-│   └── AuditClosureApiWorkflow/
-├── agents/
-│   ├── DocumentReviewAgent/
-│   ├── RiskSummarizationAgent/
-│   └── AuditSummaryAgent/
-├── apps/
-│   ├── OperationsReviewApp/
-│   ├── ComplianceReviewApp/
-│   └── SupervisorEscalationApp/
-└── deployment/
-    └── uipath-deployment-notes.md
+│   └── WM Client Onboarding Case Manager.uis
+│
+├── testdata/
+│   ├── S01_Happypath/
+│   ├── S02_MissingOnboarding_CLIENT_RESUBMISSION_OR_OPERATIONS/
+│   ├── S03_DOBMismatch_COMPLIANCE_REVIEW/
+│   ├── S04_StaleAddressProof_CLIENT_DOCUMENT_RESUBMISSION/
+│   ├── S05_ExpiredIdentity_COMPLIANCE_REVIEW/
+│   ├── S06_UnsignedOnboarding_CLIENT_DOCUMENT_RESUBMISSION/
+│   ├── S07_TaxIDMismatch_COMPLIANCE_REVIEW/
+│   ├── S08_AddressMismatch_COMPLIANCE_REVIEW/
+│   ├── S09_DuplicateClient_OPERATIONS_REVIEW/
+│   └── S10_HighRisk_COMPLIANCE_REVIEW/
+│
+├── LICENSE
+└── README.md
+```
+
+### Folder Details
+
+* `src/` contains the main UiPath Studio Web case management export file.
+* `testdata/` contains sample onboarding scenarios used to test happy-path and exception-path routing.
+* `LICENSE` contains the project license.
+* `README.md` contains the project overview, setup steps, architecture, validation notes, and deployment instructions.
 ```
 
 ## Submission Assets
